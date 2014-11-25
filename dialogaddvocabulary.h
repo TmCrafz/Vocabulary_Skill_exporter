@@ -2,6 +2,8 @@
 #define DIALOGADDVOCABULARY_H
 
 #include <QDialog>
+#include <QtXml>
+#include <QMessageBox>
 
 namespace Ui {
 class DialogAddVocabulary;
@@ -15,10 +17,14 @@ public:
     explicit DialogAddVocabulary(QWidget *parent = 0);
     ~DialogAddVocabulary();
 
+    void saveToXml(QString learningListName, QVector<QVector<QString>> vocabularyList);
+
 private slots:
     void on_pushButton_clicked();
 
     void on_pushBtnDeleteAddedVoc_clicked();
+
+    void on_pushBtnSaveVocList_clicked();
 
 private:
     Ui::DialogAddVocabulary *ui;
