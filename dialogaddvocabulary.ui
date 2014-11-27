@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>470</width>
-    <height>467</height>
+    <height>477</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -102,6 +102,20 @@
           </widget>
          </item>
         </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLineEdit" name="lineEditPath"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushBtnChoosePath">
+         <property name="text">
+          <string>Choose</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>

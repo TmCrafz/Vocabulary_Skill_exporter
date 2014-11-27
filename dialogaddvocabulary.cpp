@@ -1,12 +1,18 @@
 #include "dialogaddvocabulary.h"
 #include "ui_dialogaddvocabulary.h"
+#include <QFileDialog>
 #include <QDebug>
+#include <QDesktopServices>
 
 DialogAddVocabulary::DialogAddVocabulary(QWidget *parent) :
-    QDialog(parent),
+    QDialog(parent),    
+    path(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation)),
     ui(new Ui::DialogAddVocabulary)
 {
     ui->setupUi(this);
+    QString defFileName = "Vocabulary";
+    ui->lineEditFileName->setText("Vocabulary");
+    ui->lineEditPath->setText(path + "/" + defFileName + ".xml");
 }
 
 DialogAddVocabulary::~DialogAddVocabulary()
@@ -75,7 +81,8 @@ void DialogAddVocabulary::saveToXml(QString learningListName, QVector<QVector<QS
         vocableElement.setAttribute("unknown_word", vocable[1]);
         rootElement.appendChild(vocableElement);
     }
-    QString fileName { learningListName + ".xml" };
+   // QString fileName { learningListName + ".xml" };
+    QString fileName = ui->lineEditPath->text();
     QFile file(fileName);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
         QMessageBox::warning(this, "Error", "Cannot save file.");
@@ -88,4 +95,19 @@ void DialogAddVocabulary::saveToXml(QString learningListName, QVector<QVector<QS
         file.close();
         QMessageBox::information(this, "Saved", "Saved file");
     }
+}
+
+void DialogAddVocabulary::on_pushBtnChoosePath_clicked()
+{
+    path = QFileDialog::getExistingDirectory
+            (this, "Choose Directory", QStandardPaths::writableLocation(QStandardPaths::DesktopLocation),
+             QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    QString fileName = ui->lineEditFileName->text();
+    ui->lineEditPath->setText(path + "/" + fileName + ".xml");
+}
+
+//Change the preview of the save directory and filename
+void DialogAddVocabulary::on_lineEditFileName_textChanged(const QString &arg1)
+{
+    ui->lineEditPath->setText(path + "/" + arg1 + ".xml");
 }

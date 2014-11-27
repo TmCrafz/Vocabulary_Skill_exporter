@@ -26,8 +26,15 @@ private slots:
 
     void on_pushBtnSaveVocList_clicked();
 
+    void on_pushBtnChoosePath_clicked();
+
+
+
+    void on_lineEditFileName_textChanged(const QString &arg1);
+
 private:
     Ui::DialogAddVocabulary *ui;
+    QString path;
 };
 
 #endif // DIALOGADDVOCABULARY_H
