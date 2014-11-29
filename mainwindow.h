@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "dialogaddvocabulary.h"
+#include "dialogconverttxt.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,8 +23,11 @@ private slots:
 
     void on_pushBtnNewVocFile_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     DialogAddVocabulary *mDialogAddVocabulary;
+    DialogConvertTxt *mDialogConvertTxt;
 
 private:
     Ui::MainWindow *ui;

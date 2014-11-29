@@ -21,3 +21,9 @@ void MainWindow::on_pushBtnNewVocFile_clicked()
     mDialogAddVocabulary = new DialogAddVocabulary(0);
     mDialogAddVocabulary->show();
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    mDialogConvertTxt = new DialogConvertTxt(0);
+    mDialogConvertTxt->show();
+}
