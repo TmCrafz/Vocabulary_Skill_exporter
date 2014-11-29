@@ -1,7 +1,7 @@
 #include "dialogaddvocabulary.h"
 #include "ui_dialogaddvocabulary.h"
+#include "xmlhandler.h"
 #include <QFileDialog>
-#include <QDebug>
 #include <QDesktopServices>
 
 DialogAddVocabulary::DialogAddVocabulary(QWidget *parent) :
@@ -27,8 +27,7 @@ void DialogAddVocabulary::on_pushButton_clicked()
     QTableWidgetItem *tableKnownWord = new QTableWidgetItem(knownWord);
     QTableWidgetItem *tableUnknownWord = new QTableWidgetItem(unknownWord);
 
-    int row  =  ui->tableWidgetAddedVoc->rowCount();
-    qDebug() << "Rows" << row;
+    int row  =  ui->tableWidgetAddedVoc->rowCount(); 
     ui->tableWidgetAddedVoc->insertRow(row);
     ui->tableWidgetAddedVoc->setItem(row, 0, tableKnownWord);
     ui->tableWidgetAddedVoc->setItem(row, 1, tableUnknownWord);
@@ -57,44 +56,15 @@ void DialogAddVocabulary::on_pushBtnSaveVocList_clicked()
         QVector<QString> vocable { QVector<QString>() };
         vocable.append(knownWord);
         vocable.append(unknownWord);
-        vocabularyList.append(vocable);
-        qDebug() << "i: " << i << " Word: " << knownWord << " - " << unknownWord;
+        vocabularyList.append(vocable);       
     }
     QString learningListName { ui->lineEditFileName->text() };
-    saveToXml(learningListName, vocabularyList);
-}
-
-void DialogAddVocabulary::saveToXml(QString learningListName, QVector<QVector<QString> > vocabularyList )
-{
-    QDomDocument document;
-    QDomProcessingInstruction declaration = document.createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\"");
-    document.insertBefore(declaration, QDomNode());
-    QDomElement rootElement = document.createElement("vocabularyskill");
-    document.appendChild(rootElement);
-    QDomElement learningListElement = document.createElement("learning_list");
-    learningListElement.setAttribute("name", learningListName);
-    rootElement.appendChild(learningListElement);
-    for (auto vocable : vocabularyList)
-    {
-        QDomElement vocableElement = document.createElement("vocable");
-        vocableElement.setAttribute("known_word", vocable[0]);
-        vocableElement.setAttribute("unknown_word", vocable[1]);
-        rootElement.appendChild(vocableElement);
-    }
-   // QString fileName { learningListName + ".xml" };
-    QString fileName = ui->lineEditPath->text();
-    QFile file(fileName);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    QString path = ui->lineEditPath->text();
+    XmlHandler xmlHandler;
+    if (!xmlHandler.saveToVsXml(learningListName, vocabularyList, path))
         QMessageBox::warning(this, "Error", "Cannot save file.");
     else
-    {
-        QTextStream stream(&file);
-        stream.setCodec("UTF-8");
-        stream << document.toString();
-        file.flush();
-        file.close();
         QMessageBox::information(this, "Saved", "Saved file");
-    }
 }
 
 void DialogAddVocabulary::on_pushBtnChoosePath_clicked()

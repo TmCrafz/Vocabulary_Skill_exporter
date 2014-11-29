@@ -16,11 +16,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     dialogaddvocabulary.cpp \
-    dialogconverttxt.cpp
+    dialogconverttxt.cpp \
+    xmlhandler.cpp
 
 HEADERS  += mainwindow.h \
     dialogaddvocabulary.h \
-    dialogconverttxt.h
+    dialogconverttxt.h \
+    xmlhandler.h
 
 FORMS    += mainwindow.ui \
     dialogaddvocabulary.ui \

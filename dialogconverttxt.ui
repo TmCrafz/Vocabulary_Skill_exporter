@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>DialogConvertTxt</class>
  <widget class="QDialog" name="DialogConvertTxt">
@@ -6,12 +7,77 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>181</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="labelListName">
+       <property name="text">
+        <string>List name</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEditListName"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelTxtFile">
+       <property name="text">
+        <string>Path to txt file</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLineEdit" name="lineEditTxtPath"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushBtnChooseTxt">
+         <property name="text">
+          <string>Choose</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Save Path</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLineEdit" name="lineEditSavePath"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushBtnChooseXmlSave">
+         <property name="text">
+          <string>Choose</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushBtnConvert">
+       <property name="text">
+        <string>Convert</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
